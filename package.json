@@ -1,0 +1,37 @@
+{
+  "name": "markdown-convert",
+  "version": "1.0.0",
+  "description": "Convert Markdown to styled RTF, HTML, or macOS clipboard rich text via pandoc",
+  "bin": {
+    "markdown-convert": "./bin/cli.js"
+  },
+  "files": [
+    "bin/",
+    "assets/"
+  ],
+  "scripts": {
+    "publish": "npm publish --access public"
+  },
+  "keywords": [
+    "markdown",
+    "rtf",
+    "html",
+    "clipboard",
+    "pandoc",
+    "email"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/toddiuszho/markdown.git"
+  },
+  "homepage": "https://github.com/toddiuszho/markdown#readme",
+  "bugs": {
+    "url": "https://github.com/toddiuszho/markdown/issues"
+  },
+  "author": "toddiuszho",
+  "license": "MIT",
+  "type": "commonjs",
+  "engines": {
+    "node": ">=14"
+  }
+}
