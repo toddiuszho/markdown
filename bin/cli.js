@@ -20,7 +20,7 @@ Convert Markdown to styled RTF, HTML, or macOS clipboard rich text.
 Formats:
   --rtf             Output RTF (default)
   --html            Output standalone styled HTML
-  --clipboard       Copy rich text to macOS clipboard (like md2clip)
+  --copy            Copy rich text to macOS clipboard (pbcopy)
 
 Input:
   FILE.md           Read from a Markdown file
@@ -41,8 +41,8 @@ Other:
 Examples:
   markdown-convert README.md                # produces README.rtf
   markdown-convert --html README.md         # produces README.html
-  markdown-convert --clipboard README.md    # copy rich text to clipboard
-  markdown-convert -p --clipboard           # clipboard MD → clipboard rich text
+  markdown-convert --copy README.md          # copy rich text to clipboard
+  markdown-convert -p --copy                # clipboard MD → clipboard rich text
   markdown-convert -o out.rtf README.md     # explicit output path
   cat notes.md | markdown-convert           # RTF to stdout
   cat notes.md | markdown-convert --html    # HTML to stdout
@@ -57,7 +57,7 @@ let format = "rtf";
 let outputFile = "";
 let inputFile = "";
 let cssFile = DEFAULT_CSS;
-let clipboardMode = false;
+let copyMode = false;
 let pasteMode = false;
 
 const args = process.argv.slice(2);
@@ -70,8 +70,8 @@ for (let i = 0; i < args.length; i++) {
     case "--html":
       format = "html";
       break;
-    case "--clipboard":
-      clipboardMode = true;
+    case "--copy":
+      copyMode = true;
       break;
     case "-p":
     case "--paste":
@@ -130,8 +130,8 @@ if (!fs.existsSync(cssFile)) {
   process.exit(1);
 }
 
-if (clipboardMode && os.platform() !== "darwin") {
-  process.stderr.write("Error: --clipboard requires macOS\n");
+if (copyMode && os.platform() !== "darwin") {
+  process.stderr.write("Error: --copy requires macOS\n");
   process.exit(1);
 }
 
@@ -175,7 +175,7 @@ const html = execFileSync("pandoc", pandocHtmlArgs, {
 // ── Convert to final format ─────────────────────────────────────────
 let output;
 
-if (clipboardMode) {
+if (copyMode) {
   // macOS clipboard: hex-encode HTML, set via osascript
   const hex = Buffer.from(html, "utf8")
     .toString("hex");

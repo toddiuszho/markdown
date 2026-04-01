@@ -1,17 +1,14 @@
 {
-  "name": "markdown-convert",
-  "version": "1.0.0",
+  "name": "@toddiuszho/markdown-convert",
+  "version": "1.1.0",
   "description": "Convert Markdown to styled RTF, HTML, or macOS clipboard rich text via pandoc",
   "bin": {
-    "markdown-convert": "./bin/cli.js"
+    "markdown-convert": "bin/cli.js"
   },
   "files": [
     "bin/",
     "assets/"
   ],
-  "scripts": {
-    "publish": "npm publish --access public"
-  },
   "keywords": [
     "markdown",
     "rtf",
