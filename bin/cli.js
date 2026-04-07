@@ -180,7 +180,11 @@ if (copyMode) {
   const hex = Buffer.from(html, "utf8")
     .toString("hex");
   execFileSync("osascript", ["-e", `set the clipboard to «data HTML${hex}»`]);
-  process.stderr.write("Copied to clipboard as rich text.\n");
+  if (format === "html") {
+    process.stderr.write("Copied to clipboard as HTML.\n");
+    } else {
+    process.stderr.write("Copied to clipboard as rich text.\n");
+    }
   process.exit(0);
 } else if (format === "html") {
   output = html;
